@@ -7,8 +7,11 @@ img {
 }
 
 button {
-  height: 72px;
+  height: 74px;
   width: 72px;
+  border-radius: 15px;
+  background-color: green;
+  color: black;
 }
 
 .App-logo {
