@@ -13,8 +13,9 @@ const App = () => {
                <Route path = "/app" element={<App/>} /> {/*pathway to app.js page*/}
                <Route path = "/mastpage" element={<Mastpage/>} /> {/*pathway to mastpage.js page*/}
             </Routes>
-         </Router> 
+         </Router>
         </div>
     )
 }
+
 export default App;
