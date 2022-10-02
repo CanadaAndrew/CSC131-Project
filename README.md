@@ -1,5 +1,6 @@
 # CSC131-Project
-CSC131 Project(Recycling Team)Notes on installing:
+CSC131 Project(Recycling Team)
+Notes on installing:
 Drop empty folder (all lower case) into VSC
 Make sure you have node.js installed
 From github download App.css, App.js Mastpage.js, Results.js, index.js, and IMG_1183.JPG  In your default react project replace App.css, App.js, and index.js with the ones you downloaded form github. In src folder make pages folder and insert Results.js into it. In the public folder make a images folder and insert IMG_1183.JPG into it.
