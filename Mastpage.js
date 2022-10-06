@@ -9,11 +9,11 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const styles = {
     "&:hover":{
-        background: "Green",
+        background: "linear-gradient(45deg, green, limeGreen)",
         border: "1px solid black",
         color: "White"
     },
-    background:"LimeGreen", 
+    background: "linear-gradient(45deg, limeGreen, green)", 
     color:"Black",
     width: 100,
     height: 75,
