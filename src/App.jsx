@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
+import Button from '@mui/material/Button';
+
 
 const theme1 = createTheme({
   typography: {
@@ -14,17 +16,29 @@ const theme1 = createTheme({
     primary: { main: "#ffffff" }, // this changes the textbox to white
 
     background: {
-      default: "#13265C", //changes whole page background to gray
+      default: "#13265C", //changes whole page background to dark blue
     },
+    
   },
+
+  
 });
 
+const buttonStyle = 
 {
-  /*value = {value} onChange={e => setValue(e.target.value)} error = {!value} helperText = {!value ? 'Required' : 'Do not share your password with anyone'} use for textinput*/
+  "&:hover":{
+      background: "Green",
+      border: "1px solid black",
+      color: "White"
+  }
 }
+
+
+
 const App = () => {
   const [value, setValue] = useState("");
   const ALPHA_NUMERIC_DASH_REGEX = /^[0-9\b]+$/;
+  var btnDisabled = useState(true)
 
   return (
     <ThemeProvider theme={theme1}>
@@ -36,33 +50,57 @@ const App = () => {
           {" "}
           {/*Typography enables text editing*/}
           <h1 id="h1"> SS# Background Check</h1>
+     
+        
+
           <TextField
+      
             onKeyDown={(event) => {
               if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key) && event.key !== "Backspace") 
               {
-                {
+                
                   /* regex code above wont work with backspace*/
-                }
                 event.preventDefault();
               } else if (value.length === 9 && event.key !== "Backspace") {
                 event.preventDefault();
               }
             }}
-            onChange={(e) => setValue(e.target.value)}
+
+    
+            
+
+            onChange={(e) => setValue(e.target.value) } 
+            
+            btnDisabled={
+              value.length !== 9 
+              ? btnDisabled = true
+              : btnDisabled = false
+            }
+
             helperText={
-              value.length != 9 && value.length != 0
+              value.length !== 9 && value.length !== 0
                 ? "SS# length is invalid"
                 : " "
+                
             }
-            error={value.length < 9 && value.length != 0}
+            error={value.length < 9 && value.length !== 0}
             id="filled-basic"
             label="Social Security #"
             variant="outlined"
             sx={{ input: { color: "white" } }}
+
+            
+           
           />
+   <br /> 
+    <Button sx={buttonStyle} variant="contained" disabled={btnDisabled}>Enter</Button>
+        <h6>Note: Alphabetical and Special Characters are not allowed. Ex. A-Z !@#$%</h6>
+        <h6>Glory to Arstotzka.</h6>
         </Typography>
       </div>
     </ThemeProvider>
+    
+    
   );
 };
 
