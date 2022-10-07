@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 import Button from '@mui/material/Button';
-
+import { IMaskInput } from 'react-imask';
 
 const theme1 = createTheme({
   typography: {
@@ -33,13 +33,23 @@ const buttonStyle =
   }
 }
 
+const TextMaskCustom = React.forwardRef(function TextMaskCustom(props) {
+  const { onChange, ...other } = props;
+  return (
+    <IMaskInput
+      {...other}
+      mask="000-00-0000"
+     
+    />
+  );
+});
 
 
 const App = () => {
   const [value, setValue] = useState("");
   const ALPHA_NUMERIC_DASH_REGEX = /^[0-9\b]+$/;
   var btnDisabled = useState(true)
-
+  var count = 1
   return (
     <ThemeProvider theme={theme1}>
       {" "}
@@ -54,7 +64,24 @@ const App = () => {
         
 
           <TextField
-      
+        InputProps={{
+          //inputComponent: TextMaskCustom //textmaskcustom breaks onChange below, need to fix
+        }}
+        onChange={(e) => setValue(e.target.value) } 
+
+           
+            helperText={
+              value.length !== 9 && value.length !== 0
+                ? "SS# length is invalid"
+                : " "
+                
+            }
+            
+            btnDisabled={
+              value.length !== 9
+              ? btnDisabled = true
+              : btnDisabled = false
+            }
             onKeyDown={(event) => {
               if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key) && event.key !== "Backspace") 
               {
@@ -64,25 +91,10 @@ const App = () => {
               } else if (value.length === 9 && event.key !== "Backspace") {
                 event.preventDefault();
               }
+
             }}
-
-    
             
-
-            onChange={(e) => setValue(e.target.value) } 
-            
-            btnDisabled={
-              value.length !== 9 
-              ? btnDisabled = true
-              : btnDisabled = false
-            }
-
-            helperText={
-              value.length !== 9 && value.length !== 0
-                ? "SS# length is invalid"
-                : " "
-                
-            }
+          
             error={value.length < 9 && value.length !== 0}
             id="filled-basic"
             label="Social Security #"
